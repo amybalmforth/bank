@@ -8,12 +8,12 @@ class Bank
 
   def deposit(date, amount)
     @balance += amount
-    @statement << "Date: #{date} Credit: #{amount} Balance: #{@balance}"
+    @statement << "#{date} || #{amount} || || #{@balance}"
   end
 
   def withdraw(date, amount)
     @balance -= amount
-    @statement << "Date: #{date} Debit: #{amount} Balance: #{@balance}"
+    @statement << "#{date} || || #{amount} || #{@balance}"
   end
 
   def statement
@@ -21,7 +21,7 @@ class Bank
   end
 
   def print_statement
-    "date || credit || debit || balance\n10/01/2012 || 1000.00 || || 1000.00"
+    return "date || credit || debit || balance\n" + @statement.join(" ")
   end
 
 
