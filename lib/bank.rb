@@ -17,7 +17,7 @@ class Bank
   end
 
   def statement
-    return @statement.join("")
+    return @statement.join(" ")
   end
 
 

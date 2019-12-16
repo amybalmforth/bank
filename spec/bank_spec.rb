@@ -30,7 +30,7 @@ describe Bank do
     end
   end
 
-  describe "statement" do
+  describe "statement after 1 activity" do
     it "displays statement with empty account and no activity" do
       expect(subject.statement).to eq ""
     end
@@ -41,6 +41,14 @@ describe Bank do
     it "displays statement after withdrawal of 1000 pounds" do
       subject.withdraw("10/01/2012", 1000)
       expect(subject.statement).to eq "Date: 10/01/2012 Debit: 1000 Balance: -1000"
+    end
+  end
+
+  describe "statement after 2 activities" do
+    it "makes two deposits" do
+      subject.deposit("10/01/2012", 1000)
+      subject.deposit("10/01/2012", 500)
+      expect(subject.statement).to eq "Date: 10/01/2012 Credit: 1000 Balance: 1000 Date: 10/01/2012 Credit: 500 Balance: 1500"
     end
   end
 
