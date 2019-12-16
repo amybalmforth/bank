@@ -8,7 +8,7 @@ class Bank
 
   def deposit(date, amount)
     @balance += amount
-    @statement << "Date: #{date} Credit: #{amount}"
+    @statement << "Date: #{date} Credit: #{amount} Balance: #{@balance}"
   end
 
   def withdraw(amount)

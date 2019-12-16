@@ -36,7 +36,7 @@ describe Bank do
     end
     it "displays statement after deposit of 1000 pounds" do
       subject.deposit("10/01/2012", 1000)
-      expect(subject.statement).to eq "Date: 10/01/2012 Credit: 1000"
+      expect(subject.statement).to eq "Date: 10/01/2012 Credit: 1000 Balance: 1000"
     end
   end
 
