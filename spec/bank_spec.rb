@@ -24,6 +24,16 @@ describe Bank do
       subject.withdraw(500)
       expect(subject.balance).to eq -500
     end
+    it "withdraws 1000 pounds" do
+      subject.withdraw(1000)
+      expect(subject.balance).to eq -1000
+    end
+  end
+
+  describe "statement" do
+    it "displays statement with empty account and no activity" do
+      expect(subject.statement).to eq ""
+    end
   end
 
 end
