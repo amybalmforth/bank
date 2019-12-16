@@ -4,21 +4,21 @@ describe Bank do
 
   describe "balance" do
     it "starts with a balance of 0" do
-      expect(subject.balance).to eq 0
+      expect(subject.read_balance).to eq 0
     end
   end
 
   describe "depositing" do
     it "deposits 1000 pounds" do
       subject.deposit("10/01/2012", 1000)
-      expect(subject.balance).to eq 1000
+      expect(subject.read_balance).to eq 1000
     end
   end
 
   describe "withdrawing" do
     it "withdraws 1000 pounds" do
       subject.withdraw("10/01/2012", 1000)
-      expect(subject.balance).to eq -1000
+      expect(subject.read_balance).to eq -1000
     end
   end
 
