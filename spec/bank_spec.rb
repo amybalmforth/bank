@@ -62,4 +62,11 @@ describe Bank do
     end
   end
 
+  describe "printed full statement" do
+    it "prints full statement with headers in proper format" do
+      subject.deposit("10/01/2012", 1000)
+      expect(subject.print_statement).to eq "date || credit || debit || balance\n10/01/2012 || 1000.00 || || 1000.00"
+    end
+  end
+
 end
