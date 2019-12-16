@@ -17,11 +17,11 @@ class Bank
   end
 
   def statement
-    return @statement.join("\n")
+    return @statement.reverse.join("\n")
   end
 
   def print_statement
-    return "date || credit || debit || balance\n" + @statement.join("\n")
+    return "date || credit || debit || balance\n" + @statement.reverse.join("\n")
   end
 
 
