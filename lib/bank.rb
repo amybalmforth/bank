@@ -11,8 +11,9 @@ class Bank
     @statement << "Date: #{date} Credit: #{amount} Balance: #{@balance}"
   end
 
-  def withdraw(amount)
+  def withdraw(date, amount)
     @balance -= amount
+    @statement << "Date: #{date} Debit: #{amount} Balance: #{@balance}"
   end
 
   def statement
