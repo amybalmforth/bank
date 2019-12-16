@@ -3,10 +3,12 @@ class Bank
 
   def initialize
     @balance = 0
+    @statement = []
   end
 
-  def deposit(amount)
+  def deposit(date, amount)
     @balance += amount
+    @statement << "Date: #{date} Credit: #{amount}"
   end
 
   def withdraw(amount)
@@ -14,7 +16,7 @@ class Bank
   end
 
   def statement
-    ""
+    return @statement.join("")
   end
 
 

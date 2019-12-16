@@ -10,11 +10,11 @@ describe Bank do
 
   describe "depositing" do
     it "deposits 1000 pounds" do
-      subject.deposit(1000)
+      subject.deposit("10/01/2012", 1000)
       expect(subject.balance).to eq 1000
     end
     it "deposits 2000 pounds" do
-      subject.deposit(2000)
+      subject.deposit("13/01/2012", 2000)
       expect(subject.balance).to eq 2000
     end
   end
@@ -33,6 +33,10 @@ describe Bank do
   describe "statement" do
     it "displays statement with empty account and no activity" do
       expect(subject.statement).to eq ""
+    end
+    it "displays statement after deposit of 1000 pounds" do
+      subject.deposit("10/01/2012", 1000)
+      expect(subject.statement).to eq "Date: 10/01/2012 Credit: 1000"
     end
   end
 
