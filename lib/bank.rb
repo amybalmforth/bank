@@ -16,13 +16,8 @@ class Bank
     @statement << "#{date} || || #{amount} || #{@balance}"
   end
 
-  def statement
-    return @statement.reverse.join("\n")
-  end
-
   def print_statement
     return "date || credit || debit || balance\n" + @statement.reverse.join("\n")
   end
-
 
 end
