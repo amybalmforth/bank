@@ -37,12 +37,6 @@ describe Bank do
       subject.withdraw("14/01/2012", 500)
       expect(subject.print_statement).to eq "date || credit || debit || balance\n14/01/2012 || || 500 || -500"
     end
-    it "prints statement for two deposits and one withdrawal" do
-      subject.deposit("10/01/2012", 1000)
-      subject.deposit("13/01/2012", 2000)
-      subject.withdraw("14/01/2012", 500)
-      expect(subject.print_statement).to eq "date || credit || debit || balance\n14/01/2012 || || 500 || 2500\n13/01/2012 || 2000 || || 3000\n10/01/2012 || 1000 || || 1000"
-    end
   end
 
   describe "printed full statement with headers with two same activities" do
@@ -50,6 +44,20 @@ describe Bank do
       subject.deposit("10/01/2012", 1000)
       subject.deposit("13/01/2012", 2000)
       expect(subject.print_statement).to eq "date || credit || debit || balance\n13/01/2012 || 2000 || || 3000\n10/01/2012 || 1000 || || 1000"
+    end
+    it "prints statement for two withdrawals" do
+      subject.withdraw("10/01/2012", 500)
+      subject.withdraw("11/01/2012", 500)
+      expect(subject.print_statement).to eq "date || credit || debit || balance\n11/01/2012 || || 500 || -1000\n10/01/2012 || || 500 || -500"
+    end
+  end
+
+  describe "printed full statement with headers with acceptance criteria" do
+    it "prints statement for two deposits and one withdrawal" do
+      subject.deposit("10/01/2012", 1000)
+      subject.deposit("13/01/2012", 2000)
+      subject.withdraw("14/01/2012", 500)
+      expect(subject.print_statement).to eq "date || credit || debit || balance\n14/01/2012 || || 500 || 2500\n13/01/2012 || 2000 || || 3000\n10/01/2012 || 1000 || || 1000"
     end
   end
 
