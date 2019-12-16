@@ -53,7 +53,12 @@ describe Bank do
     it "makes two withdrawals" do
       subject.withdraw("10/01/2012", 500)
       subject.withdraw("10/01/2012", 500)
-      expect(subject.statement).to eq "Date: 10/01/2012 Debit: 500 Balance: -500 Date: 10/01/2012 Debit: 500 Balance: -1000" 
+      expect(subject.statement).to eq "Date: 10/01/2012 Debit: 500 Balance: -500 Date: 10/01/2012 Debit: 500 Balance: -1000"
+    end
+    it "makes a deposit and a withdrawal" do
+      subject.deposit("11/01/2012", 1000)
+      subject.withdraw("12/01/2012", 500)
+      expect(subject.statement).to eq "Date: 11/01/2012 Credit: 1000 Balance: 1000 Date: 12/01/2012 Debit: 500 Balance: 500"
     end
   end
 
