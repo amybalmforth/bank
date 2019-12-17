@@ -41,14 +41,18 @@ date || credit || debit || balance
 2.2.10 :001 > require "./lib/bank.rb"
  => true
 2.2.10 :002 > bank = Bank.new(statement = BankStatement.new)
- => #<Bank:0x007ffa42013990 @balance=0, @bank_statement=#<BankStatement:0x007ffa420139e0 @statement=[]>>
-2.2.10 :003 > bank.deposit('10/01/2012', 1000)
+ => #<Bank:0x007fbb9c27b500 @balance=0, @bank_statement=#<BankStatement:0x007fbb9c27b550 @statement=[]>>
+2.2.10 :003 > bank.deposit('10/01/2012', -1)
+ => "Deposits must be higher than zero"
+2.2.10 :004 > bank.withdraw('14/01/2012', -1)
+ => "Withdrawals must be higher than zero"
+2.2.10 :005 > bank.deposit('10/01/2012', 1000)
  => ["10/01/2012 || 1000 || || 1000"]
-2.2.10 :004 > bank.deposit('13/01/2012', 2000)
+2.2.10 :006 > bank.deposit('13/01/2012', 2000)
  => ["10/01/2012 || 1000 || || 1000", "13/01/2012 || 2000 || || 3000"]
-2.2.10 :005 > bank.withdraw('14/01/2012', 500)
+2.2.10 :007 > bank.withdraw('14/01/2012', 500)
  => ["10/01/2012 || 1000 || || 1000", "13/01/2012 || 2000 || || 3000", "14/01/2012 || || 500 || 2500"]
-2.2.10 :006 > puts statement.print_statement
+2.2.10 :008 > puts statement.print_statement
 date || credit || debit || balance
 14/01/2012 || || 500 || 2500
 13/01/2012 || 2000 || || 3000

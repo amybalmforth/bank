@@ -7,11 +7,15 @@ class Bank
   end
 
   def deposit(date, amount)
+    return 'Deposits must be higher than zero' if amount < 0
+
     @balance += amount
     @bank_statement.statement << "#{date} || #{amount} || || #{@balance}"
   end
 
   def withdraw(date, amount)
+    return 'Withdrawals must be higher than zero' if amount < 0
+
     @balance -= amount
     @bank_statement.statement << "#{date} || || #{amount} || #{@balance}"
   end

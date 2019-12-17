@@ -57,4 +57,16 @@ describe Bank do
       '10/01/2012 || 1000 || || 1000'
     end
   end
+
+  describe 'edge cases' do
+    bank = Bank.new(BankStatement.new)
+    it 'deposits must be higher than zero' do
+      expect(bank.deposit('10/01/2012', -1)).to eq 'Deposits must be higher'\
+      ' than zero'
+    end
+    it 'withdrawals must be higher than zero' do
+      expect(bank.withdraw('10/01/2012', -1)).to eq 'Withdrawals must be high'\
+      'er than zero'
+    end
+  end
 end
