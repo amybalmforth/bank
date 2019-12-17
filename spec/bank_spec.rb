@@ -1,69 +1,60 @@
 require 'bank'
 
 describe Bank do
-  describe 'balance' do
+  describe 'new account with no activity' do
+    bank = Bank.new(statement = BankStatement.new)
     it 'starts with a balance of 0' do
-      expect(subject.read_balance).to eq 0
+      expect(bank.read_balance).to eq 0
+    end
+    it 'displays statement with empty account and no activity' do
+      expect(statement.print_statement).to eq 'date || credit || debit || ba'\
+      "lance\n"
     end
   end
 
   describe 'depositing' do
+    bank = Bank.new(statement = BankStatement.new)
     it 'deposits 1000 pounds' do
-      subject.deposit('10/01/2012', 1000)
-      expect(subject.read_balance).to eq 1000
+      bank.deposit('10/01/2012', 1000)
+      expect(bank.read_balance).to eq 1000
+    end
+    it 'prints statement for one deposit' do
+      expect(statement.print_statement).to eq 'date || credit || debit || ba'\
+      "lance\n10/01/2012 || 1000 || || 1000"
+    end
+    it 'prints statement for two deposits' do
+      bank.deposit('13/01/2012', 2000)
+      expect(statement.print_statement).to eq 'date || credit || debit || ba'\
+      "lance\n13/01/2012 || 2000 || || 3000\n10/01/2012 || 1000 || || 1000"
     end
   end
 
   describe 'withdrawing' do
+    bank = Bank.new(statement = BankStatement.new)
     it 'withdraws 1000 pounds' do
-      subject.withdraw('10/01/2012', 1000)
-      expect(subject.read_balance).to eq(-1000)
-    end
-  end
-
-  describe 'empty statement' do
-    it 'displays statement with empty account and no activity' do
-      expect(subject.access_statement).to eq 'date || credit || debit || balan'\
-      "ce\n"
-    end
-  end
-
-  describe 'printed full statement with headers with one activity' do
-    it 'prints statement for one deposit' do
-      subject.deposit('10/01/2012', 1000)
-      expect(subject.access_statement).to eq 'date || credit || debit || balan'\
-      "ce\n10/01/2012 || 1000 || || 1000"
+      bank.withdraw('10/01/2012', 1000)
+      expect(bank.read_balance).to eq(-1000)
     end
     it 'prints statement for one withdrawal' do
-      subject.withdraw('14/01/2012', 500)
-      expect(subject.access_statement).to eq 'date || credit || debit || balan'\
-      "ce\n14/01/2012 || || 500 || -500"
-    end
-  end
-
-  describe 'printed full statement with headers with two same activities' do
-    it 'prints statement for two deposits' do
-      subject.deposit('10/01/2012', 1000)
-      subject.deposit('13/01/2012', 2000)
-      expect(subject.access_statement).to eq 'date || credit || debit || balan'\
-      "ce\n13/01/2012 || 2000 || || 3000\n10/01/2012 || 1000 || || 1000"
+      expect(statement.print_statement).to eq 'date || credit || debit || ba'\
+      "lance\n10/01/2012 || || 1000 || -1000"
     end
     it 'prints statement for two withdrawals' do
-      subject.withdraw('10/01/2012', 500)
-      subject.withdraw('11/01/2012', 500)
-      expect(subject.access_statement).to eq 'date || credit || debit || balan'\
-      "ce\n11/01/2012 || || 500 || -1000\n10/01/2012 || || 500 || -500"
+      bank.withdraw('11/01/2012', 500)
+      expect(statement.print_statement).to eq 'date || credit || debit || ba'\
+      "lance\n11/01/2012 || || 500 || -1500\n10/01/2012 || || 1000 || -1000"
     end
   end
 
   describe 'printed full statement with headers for acceptance criteria' do
+    bank = Bank.new(statement = BankStatement.new)
     it 'prints statement for two deposits and one withdrawal' do
-      subject.deposit('10/01/2012', 1000)
-      subject.deposit('13/01/2012', 2000)
-      subject.withdraw('14/01/2012', 500)
-      expect(subject.access_statement).to eq 'date || credit || debit || balan'\
-      "ce\n14/01/2012 || || 500 || 2500\n13/01/2012 || 2000 || || 3000\n10/01/"\
-      '2012 || 1000 || || 1000'
+      bank.deposit('10/01/2012', 1000)
+      bank.deposit('13/01/2012', 2000)
+      bank.withdraw('14/01/2012', 500)
+      expect(statement.print_statement).to eq 'date || credit || debit || ba'\
+      "lance\n14/01/2012 || || 500 || 2500\n13/01/2012 || 2000 || || 3000\n"\
+      '10/01/2012 || 1000 || || 1000'
     end
   end
 end

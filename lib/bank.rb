@@ -1,33 +1,26 @@
+require_relative 'bank_statement'
 # bank class
 class Bank
-  def initialize
+  def initialize(bank_statement)
     @balance = 0
-    @statement = []
+    @bank_statement = bank_statement
   end
 
   def deposit(date, amount)
     @balance += amount
-    @statement << "#{date} || #{amount} || || #{@balance}"
+    @bank_statement.statement << "#{date} || #{amount} || || #{@balance}"
   end
 
   def withdraw(date, amount)
     @balance -= amount
-    @statement << "#{date} || || #{amount} || #{@balance}"
+    @bank_statement.statement << "#{date} || || #{amount} || #{@balance}"
   end
 
   def read_balance
     balance
   end
 
-  def access_statement
-    print_statement
-  end
-
   private
 
   attr_reader :balance
-
-  def print_statement
-    "date || credit || debit || balance\n" + @statement.reverse.join("\n")
-  end
 end
