@@ -4,17 +4,22 @@ This is a back-end program written to simulate a bank account.
 
 There are methods for the following actions:
 
+Bank class -
+
 1) Depositing money (taking two parameters - date of deposit and amount)
 2) Withdrawing money (taking two parameters - date of withdrawal and amount)
+
+Bank statement class -
+
 3) Printing an account statement
 
 The program can be interacted with via IRB.
 
-I have structured the program in two objects/classes - Bank class and Bank Statement class. I originally had one class (Bank) taking care of all responsibilities as I felt all responsibilities were closely related, however I later chose to refactor into two classes. This way, all the responsibility for keeping track of account activity and printing statements is looked after solely in the Bank Statement class. I made the access to the bank balance itself private for security/access reasons (sensitive data).
+I have structured the program in two objects/classes - Bank class and Bank Statement class. I originally had one class (Bank) taking care of all responsibilities as I felt all responsibilities were closely related, however I later chose to refactor into two classes. This way, all the responsibility for keeping track of account activity and printing statements is looked after solely in the Bank Statement class. I made the access to the bank balance itself private.
 
 I spent an hour planning before starting to write tests, thinking about what functions the program needed and how these could be accomplished. I took a TDD approach writing the program. As the program grew I made some changes/improvements and ended up deleting previous tests where I was repeating myself.
 
-Deposits and withdrawals must be positive numbers (higher than zero), otherwise an error is given.
+Deposits and withdrawals must be positive numbers (higher than zero), otherwise a message is given asking for a number higher than zero.
 
 ### Acceptance criteria
 
