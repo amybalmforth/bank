@@ -1,22 +1,20 @@
 ## Bank tech test
 
-Today, you'll practice doing a tech test.
+This is a back-end program written to simulate a bank account.
 
-For most tech tests, you'll essentially have unlimited time. This practice session is about producing the best code you can when there is a minimal time pressure.
+There are methods for the following actions:
 
-You'll get to practice your OO design and TDD skills.
+1) Depositing money (taking two parameters - date of deposit and amount)
+2) Withdrawing money (taking two parameters - date of withdrawal and amount)
+3) Printing an account statement
 
-You'll work alone, and you'll also review your own code so you can practice reflecting on and improving your own work.
+The program can be interacted with via IRB.
 
-### Specification
+I have structured the program as one object (Bank class). I considered splitting into two classes but decided against it in the end as I believe all the responsibilities are closely related to one another. I made the access to printing statements and the balance itself private for security/access reasons (sensitive data).
 
-### Requirements
+I spent an hour planning before starting to write tests, thinking about what functions the program needed and how these could be accomplished. I took a TDD approach writing the program. As the program grew I made some changes/improvements and ended up deleting previous tests where I was repeating myself.
 
-You should be able to interact with your code via a REPL like IRB or the JavaScript console. (You don't need to implement a command line interface that takes input from STDIN.)
-Deposits, withdrawal.
-Account statement (date, amount, balance) printing.
-Data can be kept in memory (it doesn't need to be stored to a database or anything).
-Acceptance criteria
+### Acceptance criteria
 
 Given a client makes a deposit of 1000 on 10-01-2012
 And a deposit of 2000 on 13-01-2012
@@ -29,4 +27,30 @@ date || credit || debit || balance
 14/01/2012 || || 500.00 || 2500.00
 13/01/2012 || 2000.00 || || 3000.00
 10/01/2012 || 1000.00 || || 1000.00
+```
+
+### Instructions for running the program
+
+1) git clone https://github.com/amybalmforth/bank
+2) run "bundle install"
+3) run "rubocop"
+4) run "rspec"
+5) run irb:
+
+```
+2.2.10 :001 > require "./lib/bank.rb"
+ => true
+2.2.10 :002 > bank = Bank.new
+ => #<Bank:0x007fd59b03f250 @balance=0, @statement=[]>
+2.2.10 :003 > bank.deposit("10/01/2012", 1000)
+ => ["10/01/2012 || 1000 || || 1000"]
+2.2.10 :004 > bank.deposit("13/01/2012", 2000)
+ => ["10/01/2012 || 1000 || || 1000", "13/01/2012 || 2000 || || 3000"]
+2.2.10 :005 > bank.withdraw("14/01/2012", 500)
+ => ["10/01/2012 || 1000 || || 1000", "13/01/2012 || 2000 || || 3000", "14/01/2012 || || 500 || 2500"]
+2.2.10 :006 > puts bank.access_statement
+date || credit || debit || balance
+14/01/2012 || || 500 || 2500
+13/01/2012 || 2000 || || 3000
+10/01/2012 || 1000 || || 1000
 ```
